@@ -64,7 +64,6 @@ remover(produtos) {
     var item = stdin.readLineSync();
     produtos.remove(item);
     return;
-    //break;
   } else {
     print("IMPOSSÍVEL REMOVER\n++ Lista Vazia ++");
   }
@@ -76,21 +75,21 @@ adicionarAlista(produtos) {
   stdout.write("==> ");
   text = stdin.readLineSync();
 
-    for (var p = 0; p <= produtos.length; p++) {
-      if (produtos.contains(text)) {
-        print("O ITEM '${text},' NÃO FOI ADICIONADO A LISTA, POIS JÁ EXISTE.");
-        break;
-      } else {
-        produtos.add(text);
-        print("");
-        print("ITEMS NA LISTA");
-        for (var j = 0; j < produtos.length; j++) {
-          print("- $j ${produtos[j]}");
-        }
-        return;
-      }
+
+  if (produtos.contains(text)) {
+    print("O ITEM '${text},' NÃO FOI ADICIONADO A LISTA, POIS JÁ EXISTE.");
+    //break;
+  } else {
+    produtos.add(text);
+    print("");
+    print("ITENS NA LISTA");
+    for (var j = 0; j < produtos.length; j++) {
+      print("- $j ${produtos[j]}");
     }
+    return;
   }
+}
+
 
 
 
