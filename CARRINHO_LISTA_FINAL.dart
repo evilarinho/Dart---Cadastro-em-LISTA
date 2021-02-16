@@ -4,10 +4,9 @@ String text;
 
 
 main() {
-
   bool condicao = true;
   List<String> produtos = [];
-  int opcao ;
+  int opcao;
 
   while (condicao) {
     print("\n| ESCOLHA A OPÇÃO: | \n");
@@ -17,29 +16,40 @@ main() {
     print("4 - ADICIONAR");
     print("");
     stdout.write("==> ");
-    opcao = int.parse(stdin.readLineSync());
-    print("");
-    if (opcao == 1) {
-      sair(produtos);
-      break;
-    } else if (opcao == 2) {
-      print("--- IMPRIMINDO ---");
-      imprimir(produtos);
-    } else if (opcao == 3) {
-      print("--- REMOVER ---");
-      remover(produtos);
-    } else if (opcao == 4) {
-      print("--- ADICIONAR ---");
-      adicionarAlista(produtos);
+    //opcao = int.parse(stdin.readLineSync());
+    //print("");
+
+    try {
+      opcao = int.parse(stdin.readLineSync());
+      print("");
+    }
+    on FormatException {
+      print("\n         ATENÇÃO");
+      print("=== USE APENAS NÚMERO ===\n");
+    }
+    finally {
+      if (opcao == 1) {
+        sair(produtos);
+        break;
+      } else if (opcao == 2) {
+        print("--- IMPRIMINDO ---");
+        imprimir(produtos);
+      } else if (opcao == 3) {
+        print("--- REMOVER ---");
+        remover(produtos);
+      } else if (opcao == 4) {
+        print("--- ADICIONAR ---");
+        adicionarAlista(produtos);
+      }
     }
   }
 }
 
 
 sair(produtos) {
-    print("=== TERMINOU O PROGRAMA ===");
-    return;
-  }
+  print("=== TERMINOU O PROGRAMA ===");
+  return;
+}
 
 imprimir(produtos) {
   print("");
@@ -48,7 +58,7 @@ imprimir(produtos) {
   }else{
     for (var i = 0; i < produtos.length; i++) {
       print("ITEM $i ${produtos[i]}");
-     }
+    }
   }
 }
 
@@ -73,22 +83,31 @@ remover(produtos) {
 adicionarAlista(produtos) {
 
   stdout.write("==> ");
-  text = stdin.readLineSync();
 
-
-  if (produtos.contains(text)) {
-    print("O ITEM '${text},' NÃO FOI ADICIONADO A LISTA, POIS JÁ EXISTE.");
-    //break;
-  } else {
-    produtos.add(text);
-    print("");
-    print("ITENS NA LISTA");
-    for (var j = 0; j < produtos.length; j++) {
-      print("- $j ${produtos[j]}");
+  try {
+    text = stdin.readLineSync();
+  }
+  on FormatException {
+    print("=== USE APENAS NÚMERO ===");
+  }
+  finally {
+    if (produtos.contains(text)) {
+      print("O ITEM '${text},' NÃO FOI ADICIONADO A LISTA, POIS JÁ EXISTE.");
+      //break;
+    } else {
+      produtos.add(text);
+      print("");
+      print("ITENS NA LISTA");
+      for (var j = 0; j < produtos.length; j++) {
+        print("- $j ${produtos[j]}");
+      }
+      return;
     }
-    return;
   }
 }
+
+
+
 
 
 
